@@ -26,7 +26,7 @@ docker compose up -d
 
 What Docker Compose does:
 
-+ Starts necessary services
++ Start necessary services
 + Load plugins at `/data/plugins` into `kafka-connect`
 + Install Kafka connectors at runtime using [Confluent Hub Client](https://docs.confluent.io/kafka-connectors/self-managed/confluent-hub/client.html#install-while-online)
 
@@ -204,6 +204,11 @@ One of the messages after JSON-formatted looks like:
         "fields":
         [
             {
+                "type": "int32",
+                "optional": false,
+                "field": "id"
+            },
+            {
                 "type": "string",
                 "optional": true,
                 "field": "username"
@@ -221,8 +226,9 @@ One of the messages after JSON-formatted looks like:
     },
     "payload":
     {
+        "id": 1,
         "username": "john",
-        "login_time": 1675366341000
+        "login_time": 1675422733000
     }
 }
 ```
@@ -264,7 +270,7 @@ curl -s -X "GET" "http://localhost:9200/mysql.login/_search?pretty=true"
 Response
 ```
 {
-    "took": 297,
+    "took": 175,
     "timed_out": false,
     "_shards":
     {
@@ -289,8 +295,9 @@ Response
                 "_score": 1.0,
                 "_source":
                 {
+                    "id": 2,
                     "username": "jane",
-                    "login_time": 1675419164000
+                    "login_time": 1675422733000
                 }
             },
             {
@@ -299,8 +306,9 @@ Response
                 "_score": 1.0,
                 "_source":
                 {
+                    "id": 1,
                     "username": "john",
-                    "login_time": 1675419163000
+                    "login_time": 1675422733000
                 }
             }
         ]
