@@ -156,16 +156,16 @@ mysql -h 127.0.0.1 -uadmin -padmin
 In MySQL console, run these commands
 ```
 use test;
-create table login (username varchar(30), login_time datetime);
-insert into login values ('john', now());
-insert into login values ('jane', now());
+create table login (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, username varchar(30), login_time datetime);
+insert into login(username, login_time) values ('john', now());
+insert into login(username, login_time) values ('jane', now());
 ```
 
 #### 2.3) Create connector JdbcSource
 
 Create a connector that reads data from MySQL
 ```
-echo '{"name":"mysql-login-connector", "config":{"connector.class":"JdbcSourceConnector","connection.url":"jdbc:mysql://mysql:3306/test?user=admin","connection.password":"admin", "mode":"timestamp","table.whitelist":"login","validate.non.null":false,"timestamp.column.name":"login_time","topic.prefix":"mysql."}}' | curl -X POST -d @- http://localhost:8083/connectors --header "Content-Type:application/json"
+echo '{"name":"mysql-login-connector", "config":{"connector.class":"JdbcSourceConnector","connection.url":"jdbc:mysql://mysql:3306/test?user=admin","connection.password":"admin", "mode":"timestamp","table.whitelist":"login","validate.non.null":false,"mode": "timestamp+incrementing","incrementing.column.name": "id","timestamp.column.name":"login_time","topic.prefix":"mysql."}}' | curl -X POST -d @- http://localhost:8083/connectors --header "Content-Type:application/json"
 ```
 
 Response
