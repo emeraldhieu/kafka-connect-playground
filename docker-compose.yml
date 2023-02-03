@@ -75,8 +75,8 @@ services:
         confluent-hub install --no-prompt confluentinc/kafka-connect-jdbc:10.6.0
         
         # MySQL driver has to be on the same directory with JDBC connector plugin.
-        echo "Copying MySQL Driver into JDBC connector's diretory"
-        cp /data/libs/mysql-connector/mysql-connector-j-8.0.32.jar /data/plugins/confluent-hub-components/confluentinc-kafka-connect-jdbc/lib
+        echo "Copying MySQL's JDBC Driver into Kafka JDBC connector's diretory"
+        cp /data/libs/mysql-connector/mysql-connector-j-8.0.32.jar /usr/share/confluent-hub-components/confluentinc-kafka-connect-jdbc/lib
         
         confluent-hub install --no-prompt confluentinc/kafka-connect-elasticsearch:14.0.3
         #
