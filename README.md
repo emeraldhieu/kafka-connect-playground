@@ -7,7 +7,7 @@
 + Internet connection (to download connectors on the fly)
 + Allocate at least 5GB for Docker Desktop. Otherwise, Out of Memory will fail some service
 
-## Quickstart
+## Setup
 
 ### 1) Install Kafka clients
 
